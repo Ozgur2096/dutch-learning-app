@@ -11,7 +11,7 @@ export const getWords = async (req, res) => {
     const words = await Word.find();
     res.status(200).json(words);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching words' });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -21,10 +21,11 @@ export const getWords = async (req, res) => {
  */
 
 export const createWord = async (req, res) => {
-  const { word, definition, synonyms, antonyms } = req.body;
+  const { userId, word, definition, synonyms, antonyms } = req.body;
 
   try {
     const newWord = await Word.create({
+      userId,
       word,
       definition,
       synonyms,
@@ -32,6 +33,6 @@ export const createWord = async (req, res) => {
     });
     res.status(201).json(newWord);
   } catch (error) {
-    res.status(500).json({ message: 'Error creating word' });
+    res.status(500).json({ message: error.message });
   }
 };

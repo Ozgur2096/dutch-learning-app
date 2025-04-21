@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import { SignIn } from './pages/SignIn';
 
 function App() {
   console.log(import.meta.env.VITE_TEST);
@@ -36,6 +37,7 @@ function App() {
           </li>
         ))}
       </ul>
+      <SignIn />
     </>
   );
 }
