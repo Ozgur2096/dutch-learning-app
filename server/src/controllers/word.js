@@ -1,14 +1,19 @@
 import Word from '../models/Word.js';
 
-/** GET WORDS
+/** GET WORDS By USER ID
  *
- * @route GET /api/words/
+ * @route GET /api/word/userId
  * @desc Get all words
  */
 
 export const getWords = async (req, res) => {
+  const { userid } = req.params;
+
+  if (!userid) {
+    return res.status(400).json({ message: 'User ID is required' });
+  }
   try {
-    const words = await Word.find();
+    const words = await Word.find({ userId: userid });
     res.status(200).json(words);
   } catch (error) {
     res.status(500).json({ message: error.message });

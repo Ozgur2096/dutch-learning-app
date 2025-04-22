@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+// import './LoginCard.css';
 
-export const SignIn = () => {
+export const LoginCard = () => {
   const [user, setUser] = useState({ username: '', password: '', email: '' });
+  const navigate = useNavigate();
+
   const handleChange = e => {
     setUser({ ...user, [e.target.name]: e.target.value });
     console.log(user);
   };
+
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/user', {
+      const response = await fetch('http://localhost:5000/api/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -18,25 +23,17 @@ export const SignIn = () => {
       });
       const data = await response.json();
       console.log(data);
+      document.cookie = `token=${data.token}; path=/`;
+      document.cookie = `userId=${data.userId}; path=/`;
+      navigate('/dashboard'); // Redirect to dashboard on successful login
     } catch (error) {
       console.error('Error:', error);
     }
   };
   return (
-    <div>
-      <h1>Sign In</h1>
+    <div className='login-card'>
+      <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='username'>Username:</label>
-          <input
-            type='text'
-            id='username'
-            name='username'
-            value={user.username}
-            onChange={handleChange}
-            required
-          />
-        </div>
         <div>
           <label htmlFor='email'>Email:</label>
           <input
@@ -57,8 +54,9 @@ export const SignIn = () => {
             required
           />
         </div>
-        <button type='submit'>Sign In</button>
+        <button type='submit'>Login</button>
       </form>
     </div>
   );
 };
+// export default LoginCard;

@@ -1,0 +1,44 @@
+import React, { useState, useEffect } from 'react';
+import { getCookie } from '../utility/getCookie';
+
+export const Dashboard = () => {
+  const [myWords, setMyWords] = useState([]);
+  const userId = getCookie('userId');
+
+  // fetch data from the server
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          import.meta.env.VITE_API_URL + '/word' + `/${userId}`
+        );
+        const data = await response.json();
+        console.log(data);
+        setMyWords(data);
+        console.log(myWords);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  return (
+    <div className='dashboard'>
+      <h1>Dashboard</h1>
+      <p>Welcome to the dashboard!</p>
+      <p>This will be a protected route, I hope</p>
+      <h2>Words</h2>
+      <ul>
+        {myWords.map(word => (
+          <li key={word._id}>
+            <h3>{word.word}</h3>
+            <p>Definition: {word.definition}</p>
+            <p>Synonyms: {word.synonyms.join(', ')}</p>
+            <p>Antonyms: {word.antonyms.join(', ')}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};

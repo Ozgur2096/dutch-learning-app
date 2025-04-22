@@ -16,7 +16,7 @@ export const getUsers = async (req, res) => {
 };
 
 /** CREATE USER
- * @route POST /api/user/
+ * @route POST /api/user/signup
  * @desc Create a new user
  */
 export const createUser = async (req, res) => {
@@ -44,7 +44,38 @@ export const createUser = async (req, res) => {
       expiresIn: '2h',
     });
 
-    res.status(201).json({ user: newUser, token });
+    res.status(201).json({ userId: newUser._id, token });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+/** LOGIN USER
+ * @route POST /api/user/login
+ * @desc Login a user
+ */
+export const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Check if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
+
+    // Check password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: '2h',
+    });
+
+    res.status(200).json({ userId: user._id, token });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
