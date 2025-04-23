@@ -1,8 +1,12 @@
+import { IoIosAddCircle } from 'react-icons/io';
 import React, { useState, useEffect } from 'react';
 import { getCookie } from '../utility/getCookie';
+import { CreateWordCard } from '../components/CreateWordCard';
+import '../styles/Dashboard.css';
 
 export const Dashboard = () => {
   const [myWords, setMyWords] = useState([]);
+  const [showAddWord, setShowAddWord] = useState(false);
   const userId = getCookie('userId');
 
   // fetch data from the server
@@ -28,6 +32,15 @@ export const Dashboard = () => {
       <h1>Dashboard</h1>
       <p>Welcome to the dashboard!</p>
       <p>This will be a protected route, I hope</p>
+      {/* add new words */}
+
+      <IoIosAddCircle
+        onClick={() => setShowAddWord(!showAddWord)}
+        className='add-word'
+        title='Add Word'
+      />
+      {showAddWord && <CreateWordCard />}
+
       <h2>Words</h2>
       <ul>
         {myWords.map(word => (

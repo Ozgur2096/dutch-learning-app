@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/LoginSignUp.css';
 
 export const SignupCard = () => {
   const [user, setUser] = useState({ username: '', password: '', email: '' });
@@ -34,9 +35,9 @@ export const SignupCard = () => {
     }
   };
   return (
-    <div>
+    <div className='signup-card'>
       <h1>Sign up</h1>
-      <form onSubmit={handleSubmit}>
+      <form className='auth-form' onSubmit={handleSubmit}>
         <div>
           <label htmlFor='username'>Username:</label>
           <input

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import './LoginCard.css';
+import '../styles/LoginSignUp.css';
 
 export const LoginCard = () => {
   const [user, setUser] = useState({ username: '', password: '', email: '' });
@@ -33,7 +33,7 @@ export const LoginCard = () => {
   return (
     <div className='login-card'>
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+      <form className='auth-form' onSubmit={handleSubmit}>
         <div>
           <label htmlFor='email'>Email:</label>
           <input

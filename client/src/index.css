@@ -11,6 +11,40 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* 🎯 Main Theme Colors */
+  --color-primary: #007bff; /* Bright blue */
+  --color-primary-dark: #0056b3;
+  --color-secondary: #6c757d; /* Neutral gray */
+  --color-accent: #ff5722; /* Vivid orange */
+  --color-background: #f9f9f9;
+  --color-surface: #ffffff;
+  --color-border: #e0e0e0;
+  --color-text: #333333;
+  --color-muted: #888888;
+
+  /* ✅ Status Colors */
+  --color-success: #28a745;
+  --color-warning: #ffc107;
+  --color-error: #dc3545;
+  --color-info: #17a2b8;
+
+  /* 🌈 Chart/Utility Palette */
+  --color1: #4e79a7;
+  --color2: #f28e2b;
+  --color3: #e15759;
+  --color4: #76b7b2;
+  --color5: #59a14f;
+  --color6: #edc948;
+  --color7: #b07aa1;
+  --color8: #ff9da7;
+  --color9: #9c755f;
+  --color10: #bab0ab;
+
+  /* 🔲 Neutrals */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-light-gray: #f1f1f1;
+  --color-dark-gray: #222222;
 }
 
 a {
@@ -24,10 +58,15 @@ a:hover {
 
 body {
   margin: 0;
+  padding: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: linear-gradient(135deg, #edf2fb, #e2eafc);
+  /* for dark mode */
+  /* background-color: #1e1f24; */
+  /* color: #f1f1f1; */
 }
 
 h1 {
