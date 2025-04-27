@@ -1,11 +1,12 @@
 .app-header {
   width: 100%;
-  padding: 1rem 2rem;
+  height: 60px;
+  padding: 0;
   background-color: var(--color-primary);
   color: var(--color-white);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-bottom: 2px solid var(--color-primary-dark);
 }
@@ -14,6 +15,7 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
+  padding-left: 20px;
 }
 
 .logo-icon {
