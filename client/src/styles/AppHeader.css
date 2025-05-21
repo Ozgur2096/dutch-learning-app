@@ -6,7 +6,7 @@
   color: var(--color-white);
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: space-between;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-bottom: 2px solid var(--color-primary-dark);
 }
@@ -27,4 +27,11 @@
   font-size: 1.8rem;
   font-weight: bold;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.app-header-user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-right: 20px;
 }

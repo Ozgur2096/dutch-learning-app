@@ -9,6 +9,24 @@ export const Dashboard = () => {
   const [showAddWord, setShowAddWord] = useState(false);
   const userId = getCookie('userId');
 
+  // delete word
+  const deleteWord = async wordId => {
+    try {
+      const response = await fetch(
+        import.meta.env.VITE_API_URL + '/word/' + wordId,
+        {
+          method: 'DELETE',
+        }
+      );
+      if (response.ok) {
+        setMyWords(myWords.filter(w => w._id !== wordId));
+      } else {
+        alert('Error deleting word card!');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
   // fetch data from the server
   useEffect(() => {
     const fetchData = async () => {
@@ -49,6 +67,15 @@ export const Dashboard = () => {
             <p>Definition: {word.definition}</p>
             <p>Synonyms: {word.synonyms.join(', ')}</p>
             <p>Antonyms: {word.antonyms.join(', ')}</p>
+            <button
+              className='delete-word'
+              onClick={() => {
+                deleteWord(word._id);
+              }}
+              title='Delete Word'
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>
